@@ -127,11 +127,11 @@ class Assessment_Model extends Model{
     }
     
     function findAssessorByOccupationName($occupation){
-        return $this->db->select("select * from assessor where assessor.occupation = '".$occupation."'");
+        return $this->db->select("select * from assessor,assessor_assessment_schedule where assessor.occupation = '".$occupation."' and assessor.assessor_id <> assessor_assessment_schedule.assessor_id ");
     }
     
     function findAllSupervisor(){
-        return $this->db->select("select * from supervisor");
+        return $this->db->select("select * from supervisor,supervisor_assessment_schedule where supervisor_assessment_schedule.supervisor_id <>supervisor.supervisor_id ");
     }
             
     function persistAssessor($data){
