@@ -82,13 +82,68 @@
 	border: solid 1px #e5e5da;
 	padding: 6px 41px 9px;
 }
+alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+}
+.alert .close {
+    font-size: 20px;
+    margin-top: 1px;
+}
+.alert:before{
+    font-size: 1px;
+}
+#block{
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
     </style>
     
     <script>
         jQuery(document).ready(function () {
             DataTableBasic.init();
         });
-        
+       
+       var myParam = location.search.split('response=')[1];
+     if(myParam != null){
+         var t;
+         var iDiv = document.createElement('div');  
+          iDiv.id = 'block';
+         if(myParam == 1 || myParam == 3){
+             iDiv.className = 'alert alert-success alert-dismissible';
+              t = document.createTextNode("Registration finished Successfully.");
+         }
+         if(myParam ==2 || myParam == 4){
+             iDiv.className = 'alert alert-danger alert-dismissible';
+             t= document.createTextNode("Registration fail");
+         }
+      
+          //$('panelBody').append(iDiv);
+          //document.getElementById('body')[0].appendChild(iDiv);
+          document.getElementsByTagName('body')[0].appendChild(iDiv);
+          var para = document.createElement("P");                       // Create a <p> element
+          //var t = document.createTextNode("This is a paragraph.");      // Create a text node
+          para.appendChild(t);                                          // Append the text to <p>
+          var x = $("<a class=\"alert alert-success alert-dismissible\"  data-dismiss=\"alert\" aria-label=\"close\" \>" +"&times;" + "</a>");
+          var link = document.createElement('a');
+          if(myParam ==1)
+            link.setAttribute('href', '<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessor/assessorRegistration');
+          if(myParam == 3)
+             link.setAttribute('href', '<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/supervisor/supervisorRegistration'); 
+          link.setAttribute('class', 'close');
+          link.setAttribute('data-dismiss', 'alert');
+          link.setAttribute('aria-label', 'close');
+          link.innerHTML = "&times;";
+ 
+          iDiv.appendChild(link);
+          iDiv.appendChild(para);
+          document.getElementById("msg").appendChild(iDiv);
+         //document.getElementsByTagName('body')[0].appendChild(iDiv);
+         //$('#assessor_status').html("Success");
+     }
+         //alert(myParam);
 //        $(document).ready(function() {
 // $('#assessmentDate').datepicker('setStartDate', new Date());
 // });

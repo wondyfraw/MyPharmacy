@@ -135,6 +135,30 @@ and open the template in the editor.
                     error:function (){}
           });
   }
+  function checkAvailabilityS(tableName){
+        var email = document.getElementById("myEmail").value;
+       check = [];
+       check[0] = email;
+       check[1] = tableName;
+       jQuery.ajax({
+                    url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/supervisor/check_availability',
+                    data:{username:check},
+                    type: "POST",
+                    success:function(data){
+                    //jQuery("#user-availability-status").html(data);
+                    if(data == 'OK'){                      
+                         jQuery("#user-availability-status").text("*Email address is already exist");
+                         jQuery('#submit').attr('disabled',true);  
+                       }
+                     else{
+                         jQuery("#user-availability-status").text("");
+                         jQuery('#submit').attr('disabled',false);
+                     }
+                    //$("#loaderIcon").hide();
+                    },
+                    error:function (){}
+          });
+    }
     function saveAssessmentSchedule(){
           schedule = [];
           schedule[0] = document.getElementById("idAS").value;
@@ -190,12 +214,14 @@ and open the template in the editor.
           if(assessorId != null){
               assessor[0] = assessorId;
               assessor[1] = assessmentScheduleId;
+              //alert(assessor[0]);
              jQuery.ajax({
                  url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/selectAssessor',
                  data:{assessor:assessor},
+                 type: "POST",
                  success:function(data){
                    if(data == 'OK'){
-                       //alert('successfully add assessor');
+                       alert('successfully add assessor');
                        $("#DivSpan").append("Assessor added successfullys..!!");
                    } 
               },
@@ -445,7 +471,7 @@ and open the template in the editor.
                     
                     <li class="has-submenu">
                         <a href="#submenuTwo" data-toggle="collapse" aria-expanded="false">
-                            <i class="sli-present"></i> 
+                            <i class="sli-user"></i> 
                             <span class="nav-text">Users</span>
                         </a>
                         <div class="sub-menu collapse secondary" id="submenuTwo">
@@ -487,10 +513,7 @@ and open the template in the editor.
                                 <li><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentRegistration">Assessment Registration</a></li>
                                 <li><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentList">Manage Assessment</a></li>
                                 <li><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentDetailes">Assessment Details</a></li>
-                                <li><a href="page-500.php">500 Page</a></li>
-                                <li><a href="page-invoice.php">Invoice</a></li>
-                                <li><a href="page-faq.php">FAQs</a></li>
-                                <li><a href="page-timeline.php">Timeline</a></li>
+
                             </ul>
                         </div>
                     </li>
@@ -511,14 +534,13 @@ and open the template in the editor.
                     <li class="has-submenu">
                         <a href="#submenuEleven" data-toggle="collapse" aria-expanded="false">
                             <i class="sli-briefcase"></i> 
-                            <span class="nav-text">Components</span>
+                            <span class="nav-text">Supervisor</span>
                         </a>
                         <div class="sub-menu collapse secondary" id="submenuEleven">
                             <ul>
-                                <li><a href="cmp-nestable.php">Nestable List</a></li>
-                                <li><a href="cmp-activity-list.php">Activity Timeline</a></li>
-                                <li><a href="cmp-justgage.php">JustGage</a></li>
-                                <li><a href="cmp-hr-timeline.php">Horizontal Timeline</a></li>
+                                <li><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/supervisor/supervisorRegistration">Supervisor Registration</a></li>
+                                <li><a href="#">Manage Supervisor</a></li>
+                                <li><a href="#">Supervisor Activities</a></li>                           
                             </ul>
                         </div>
                     </li>

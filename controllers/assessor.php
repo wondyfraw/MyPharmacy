@@ -48,14 +48,15 @@ class Assessor extends Controller {
          );
          $result = $this->model->findByEmail(filter_input(INPUT_POST, 'myEmail'), null);
          if(count($result)>0){
-             $this->view->error = 1;
-             return ;
+             header('location:' . URL . 'assessor/assessorRegistration?response=2');
          }
-          $lastId = $this->model->persistAssessor($data);
-          self::$error = 1;
-          $this->view->error = self::$error;
-          if(is_numeric($lastId))
-            header('location:' . URL . 'assessor/assessorRegistration');
+         else{
+            $lastId = $this->model->persistAssessor($data);           
+            if(is_numeric($lastId))
+               header('location:' . URL . 'assessor/assessorRegistration?response=1');
+            else
+               header('location:' . URL . 'assessor/assessorRegistration?response=2');   
+         }
      }
     }
     

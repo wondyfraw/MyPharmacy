@@ -14,6 +14,7 @@
                         <h3 class="panel-title">Supervisor Registration Form</h3>
 
                     </div>
+                    <div id="msg"></div>
                     <div class="panel-body">
                         <form method="post" action="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/supervisor/persistSupervisor" enctype="multipart/form-data">
                             <fieldset>
@@ -106,7 +107,7 @@
                                     <div class="form-group">
                                         <td>
                                             <label for="myEmail" style="margin-left: 250px;">Email address * </label></td>
-                                        <td> <input id="myEmail" name="myEmail" class="form-control" type="email" onblur='checkAvailability("supervisor");'
+                                        <td> <input id="myEmail" name="myEmail" class="form-control" type="email" onblur='checkAvailabilityS("supervisor");'
                                                     style="width: 200%">
                                             <span class="text-danger" id="user-availability-status"></span>
                                             <span id="error_email" class="text-danger"></span></td>

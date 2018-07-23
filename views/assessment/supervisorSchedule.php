@@ -89,7 +89,6 @@
                                     <label>Assessors</label>
                                     <select class="form-control" id="supervisorId" name="supervisorId" data-validation="required" style=" font-size: 14px;width: 60%">
                                         <option selected hidden> select supervisor</option>
-                                        <option value="wonde">Wonde</option>
                                         <?php foreach ($this->allSupervisor as $supervisorW) {?>
                                         <option value="<?php echo $supervisorW['supervisor_id'] ;  ?>">
                                                 <?php echo $supervisorW['supervisor_first_name'] . " ". $supervisorW['supervisor_middle_name']." ".$supervisorW['supervisor_last_name'];  ?> 

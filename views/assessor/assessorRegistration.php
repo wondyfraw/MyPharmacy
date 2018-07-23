@@ -14,7 +14,8 @@
                         <h3 class="panel-title">Assessor Registration Form</h3>
 
                     </div>
-                    <div class="panel-body">
+                    <div id="msg"></div>
+                    <div class="panel-body" id="panelBody">
                         <form method="post" action="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessor/persistAssessor" enctype="multipart/form-data">
                             <fieldset>
                                 <legend class="panel-title">Personal Details</legend>
@@ -195,16 +196,7 @@
                                 </table>
                             </fieldset>   
                             <button type="submit" ons name="submit" id="submit" class="btn btn-primary" style="margin-left: 100px;width: 200px;padding: 10px;margin-top:30px">Submit</button>
-                        <a class="btn btn-primary" href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/" role="button" style="margin-left: 3px;width: 200px;padding: 10px;margin-top:30px">Back to Home page</a>
-                        <?php if($this->error == 1) {?>
-                        <div class="alert alert-danger">
-                            <ul>
-                                <li>
-                                    Email address must be unique
-                                </li>
-                            </ul>
-                        </div>
-                        <?php } ?>
+                        <a class="btn btn-primary" href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/" role="button" style="margin-left: 3px;width: 200px;padding: 10px;margin-top:30px">Back to Home page</a>                     
                         </form>
                     </div>
 
