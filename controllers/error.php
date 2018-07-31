@@ -16,9 +16,15 @@ class Error extends Controller {
     function __construct() {
         parent::__construct();
         
-        echo 'this is an error<br/>';
+//        echo 'this is an error<br/>';
+//        
+//        $this->view->msg = 'This page does not exist';
+//        $this->view->render1('error/index');
+    }
+    function index(){
+        //echo 'this is an error<br/>';
         
         $this->view->msg = 'This page does not exist';
-        $this->view->render('error/index');
+        $this->view->render1('error/index');
     }
 }

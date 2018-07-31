@@ -26,7 +26,8 @@ class Assessor extends Controller {
     }
     function persistAssessor(){
      if(isset($_POST['submit'])){
-         $image = addslashes(file_get_contents($_FILES['imageUpload']["tmp_name"]));
+         $image = chunk_split(base64_encode(file_get_contents($_FILES['imageUpload']['tmp_name'])));
+         //$image = addslashes(file_get_contents($_FILES['imageUpload']["tmp_name"]));
          $data = array('occupation' => filter_input(INPUT_POST, 'occupation'),
                        'firstName'  => filter_input(INPUT_POST, 'myName'),
                        'middleName' => filter_input(INPUT_POST, 'myMiddleName'),
@@ -70,5 +71,47 @@ class Assessor extends Controller {
             else
                 echo 'NO';
         }
+    }
+    
+    //List Assessor profile 
+    function assessorList(){
+        $this->view->assessors = $this->model->findAllAssessor();
+        
+        $this->view->render1('assessor/assessorList' , 'header' , 'footer');
+    }
+    
+    function editAssessor(){
+        if(isset($_GET['assessrId'])){
+           $result = $this->model->findAssessorById($_GET['assessrId']);
+//           echo '<pre>';
+//           print_r($result);die();
+//           $image = $result[0]['image'];
+//           header("Content-type: image/jpg");
+//           echo base64_decode($image);die();
+           $this->view->occupations = $this->model->findAllOccupation();
+           $this->view->assessors = $result;
+           $this->view->render1('assessor/editAssessor' , 'header', 'footer');
+        }
+        else{
+             header('location:' . URL . 'assessor/assessorList');
+        }
+    }
+    
+    function selectImage(){
+        if(isset($_GET['Id'])){
+            $result = $this->model->findAssessorById($_GET['Id']);
+
+           $image = $result[0]['image'];
+           header("Content-type: image/jpg");
+           echo base64_decode($image);
+        }
+    }
+    /**
+     * 
+     * @return type
+     */
+    function findAllOccupation(){
+        
+        return $this->model->findAllOccupation(); 
     }
 }

@@ -526,7 +526,7 @@ and open the template in the editor.
                         <div class="sub-menu collapse secondary" id="submenuFive">
                             <ul>
                                 <li><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessor/assessorRegistration">Assessor Registration</a></li>
-                                <li><a href="map-vector.php">Manage Assessor</a></li>
+                                <li><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessor/assessorList">Manage Assessor</a></li>
                             </ul>
                         </div>
                     </li>

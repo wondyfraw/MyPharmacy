@@ -31,12 +31,16 @@ class Assessment extends Controller {
     
     function editAssessment(){
         if (isset($_GET['assessmentId'])){
+          $occupationInAssessment = array();  
           $this->view->occupationsE = $this->model->findAllOccupation();
           $occ = $this->model->findAllOccupation();
           $result = $this->model->findAssessmentById($_GET['assessmentId']);
-          $occupationInAssessment = $this->model->findOccupationById($result[0]['occupationId']);
-          $occupationInAssessment[0]['occupation_id'] = $result[0]['occupationId'];
-          $this->view->occupationName = $occupationInAssessment;
+          if(count($result) > 0){
+             $occupationInAssessment = $this->model->findOccupationById($result[0]['occupationId']);
+          }
+          if(count($occupationInAssessment) > 0)
+             $occupationInAssessment[0]['occupation_id'] = $result[0]['occupationId'];
+             $this->view->occupationName = $occupationInAssessment;
           $this->view->assessmentsEdit = $result;
           $this->view->render1('assessment/editAssessment', 'header' , 'footer');
           
