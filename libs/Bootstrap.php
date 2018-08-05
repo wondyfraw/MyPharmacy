@@ -9,7 +9,7 @@ class Bootstrap {
 		$url = filter_var($url, FILTER_SANITIZE_URL);
 		$url = explode('/', $url);
 
-		//print_r($url);die();
+//		print_r($url);die();
                 //define('DS', DIRECTORY_SEPARATOR);
 //                define('DS', '/');
 //                define('ROOT', realpath(dirname(__FILE__)) . DS);
@@ -34,13 +34,22 @@ class Bootstrap {
 		$controller->loadModel($url[0]);
 
 		// calling methods
-		if (isset($url[2])) {
+                 if(isset ($url[3])){
+                    if(method_exists($controller, $url[1])){
+                    $controller->{$url[1]}($url[2],$url[3]);
+                    }
+                    else{
+                        $this->error();
+                    }
+                }
+		else if (isset($url[2])) {
 			if (method_exists($controller, $url[1])) {
 				$controller->{$url[1]}($url[2]);
 			} else {
 				$this->error();
 			}
-		} else {
+		} 
+                else {
 			if (isset($url[1])) {
 				if (method_exists($controller, $url[1])) {
 					$controller->{$url[1]}();

@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="form-group">
                                     <td>
-                                        <label for="phoneAlt" style="margin-left: 250px">Alter Phone * </label></td>
+                                        <label for="phoneAlt" style="margin-left: 250px">Alter Phone </label></td>
                                     <td> <input id="phone" name="phoneAlt" class="form-control" data-validation="required" type="number"
                                                 style="width: 200%">
                                           <span id="error_phoneAlt" class="text-danger"></span></td>

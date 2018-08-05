@@ -33,7 +33,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if(count($this->assessors)>0){                                         
+                                        <?php if(count($this->assessors)>0){
                                             foreach ($this->assessors as $assessor) {?>
                                         <tr>
                                            <td><?php echo $assessor['assessor_first_name'] . " ". $assessor['assessor_middle_name']." ".$assessor['assessor_last_name']; ?></td>  

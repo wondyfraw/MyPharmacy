@@ -18,11 +18,11 @@ class Supervisor extends Controller {
         $this->view->map = 0;
     }
 
-    function supervisorRegistration() {
+    public function supervisorRegistration() {
         $this->view->render1('supervisor/supervisorRegistration', 'header', 'footer');
     }
 
-    function persistSupervisor() {
+    public function persistSupervisor() {
         if (isset($_POST['submit'])) {
             $image = addslashes(file_get_contents($_FILES['imageUpload']["tmp_name"]));
             $data = array('firstName' => filter_input(INPUT_POST, 'myName'),
@@ -52,8 +52,20 @@ class Supervisor extends Controller {
             }
         }
     }
-
-    function check_availability() {
+    
+    public function supervisorList(){
+        $this->view->supervisors = $this->model->findAllSupervisor();
+        $this->view->render1('supervisor/supervisorList' , 'header', 'footer');
+    }
+    public function editSupervisor(){
+        if(isset($_GET['supervisorId'])){
+            
+        }
+        else{
+            header('location' .URL . 'supervisor/supervisorList');  
+        }
+    }
+      public function check_availability() {
         if (isset($_POST['username'][0]) && isset($_POST['username'][1])) {
             $email = $_POST['username'][0];
             $tableName = $_POST['username'][1];
@@ -62,6 +74,17 @@ class Supervisor extends Controller {
                 echo 'OK';
             else
                 echo 'NO';
+        }
+    }
+    
+    /**
+     * 
+     */
+      function checkAvailabilityWithId(){
+        if(isset($_POST['username'][0]) && isset($_POST['username'][1]) && isset($_POST['username'][2])){
+            $email = $_POST['username'][0];
+            $tableName = $_POST['username'][1];
+            $id = $_POST['username'][2];
         }
     }
 

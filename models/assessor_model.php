@@ -13,7 +13,7 @@ class Assessor_Model extends Model {
     }
     
     function findAllAssessor(){
-        return $this->db->select("select * from assessor");
+        return $this->db->select("select * from assessor ORDER BY assessor_id ASC");
     }
     
     /**
@@ -21,7 +21,7 @@ class Assessor_Model extends Model {
      * @return type array of data
      */
     function findAllOccupation(){
-        return $this->db->select("select * from occupation");
+        return $this->db->select("select * from occupation ORDER BY registration_date ASC");
     }
     
     /**
@@ -35,6 +35,16 @@ class Assessor_Model extends Model {
         return $this->db->select("select * from assessor where email = '".$email."'");
     }
     
+    /**
+     * 
+     * @param type $email
+     * @param type $tableName
+     * @param type $id
+     * @return type
+     */
+    function  findByEmailId($email, $tableName, $id){
+        return $this->db->select("select * from $tableName where email = '".$email."' and assessor_id <> '".$id."'");
+    }
     /**
      * 
      * @param type $data
@@ -73,5 +83,32 @@ class Assessor_Model extends Model {
    
     function findAssessorById($assessorId){
         return $this->db->select("select * from assessor where assessor_id = '".$assessorId."'");  
+    }
+    
+    /**
+     * 
+     * @param type $data
+     * update table with primary key 
+     */
+    function updateAssessor($data){
+            $dataUpdate = array(
+               'assessor_first_name'   => $data['firstName'],
+               'assessor_middle_name'  => $data['middleName'],
+               'assessor_last_name'    => $data['lastName'],
+               'occupation'            => $data['occupation'],
+               'level_assessed'        => $data['lavels'],
+               'organization'          => $data['organization'],
+               'accreditation_date'    => $data['accreditationDate'],
+               'assessor_type'         => $data['assessorType'],
+               'address'               => $data['address'],
+               'phone_number'          => $data['phone'],
+               'alternate_phone'       => $data['phoneAlt'],
+               'date_of_birth'         => $data['dob'],
+               'gender'                => $data['gender'],
+               'email'                 => $data['email'],
+               'image'                 => $data['image'],
+               'modified_date'         => $data['modDate']
+        );
+        $this->db->update('assessor' , $dataUpdate,"`assessor_id` = {$data['assessor_id']}");
     }
 }

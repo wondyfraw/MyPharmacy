@@ -33,5 +33,9 @@ class Supervisor_Model extends Model {
     function findByEmail($email, $tableName){
         return $this->db->select("select * from $tableName where email = '".$email."'");
     }
+    
+    public function findAllSupervisor(){
+        return $this->db->select("select * from supervisor");
+    }
 }
 
