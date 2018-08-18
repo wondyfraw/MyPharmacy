@@ -59,7 +59,8 @@ class Supervisor extends Controller {
     }
     public function editSupervisor(){
         if(isset($_GET['supervisorId'])){
-            
+            $this->view->supervisor = $this->model->findSupervisorById($_GET['supervisorId']);
+            $this->view->render1('supervisor/editSupervisor', 'header', 'footer');
         }
         else{
             header('location' .URL . 'supervisor/supervisorList');  

@@ -64,10 +64,10 @@
                                             <td><?php echo $occupation['occupation_name']; ?></td>
                                             <td><?php echo $occupation['registration_date']; ?></td>
                                             <td><?php echo $occupation['modification_date']; ?></td>
-                                            <td><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/occupation/occupationDetails?id=<?php echo $occupation['occupation_id']; ?>" data-toggle="tooltip" title="view" class="btn btn-primary btn-link active" role="button" aria-pressed="true"><i class="fa fa-search"></i></a>
-                                              <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="Edit" class="btn btn-primary btn-link active" role="button" aria-pressed="true" 
+                                            <td><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/occupation/occupationDetails?id=<?php echo $occupation['occupation_id']; ?>" data-toggle="tooltip" title="view" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true"><i class="fa fa-search"></i></a>
+                                              <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="Edit" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
                                                          onclick='openT(<?php echo json_encode($occupation); ?>);'><i class="fa fa-pencil"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="delete" class="btn btn-primary btn-link active" role="button" aria-pressed="true" 
+                                                <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="delete" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
                                                          onclick='openT(<?php echo json_encode($occupation); ?>);'><i class="fa fa-trash"></i></a>
                                             </td>
 <!--                                            <td><a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="Edit" class="btn btn-primary btn-link active" role="button" aria-pressed="true" 

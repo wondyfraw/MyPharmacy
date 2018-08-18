@@ -33,12 +33,12 @@
                 
                 <a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentList" data-toggle="tooltip" title="Back to assessment list" class="btn btn-primary btn-link active" role="button" aria-pressed="true">Back To Assessment</a>
                 <?php if($this->assessments[0]['assessment_state'] == 'READY'){ ?>
-                <a href="#" data-toggle="modal" data-target="#myAssessmentDeleteModal" data-toggle="tooltip" title="Close session" 
-                   class="btn btn-danger btn-link active" role="button" aria-pressed="true" >Close Assessment Session</a>
+                <a href="#" data-toggle="modal" data-target="#myAssessmentCloseModal" data-toggle="tooltip" title="Close session" 
+                   onclick='passAssessmentId(<?php echo $this->assessments[0]['assessmet_id']; ?>);' class="btn btn-danger btn-link active" role="button" aria-pressed="true" >Close Assessment Session</a>
                 <?php } ?>
                 
                   <!--  Assessment deletion modales  -->
-                        <div class="modal fade" id="myAssessmentDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal fade" id="myAssessmentCloseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog modal-sm" role="document">
                                 <div class="modal-content">
                                     <form class="form-horizontal" action="" method="post">
@@ -50,11 +50,11 @@
                                         Once you close the session the operation can not be undo!!Confirm please
                                     </div>
                                     <div class="col-sm-10">
-                                        <input type="hidden" name="idA" class="form-control" id="idA">
+                                        <input type="hidden" name="idAS" class="form-control" id="idAS">
                                      </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" onclick='closeAssessmentSession(<?php echo $this->id; ?>);'>Confirm</button>
+                                        <button type="submit" class="btn btn-primary" onclick="closeAssessmentSession()">Confirm</button>
                                     </div>
                                     </form>
                                 </div>

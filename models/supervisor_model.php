@@ -37,5 +37,9 @@ class Supervisor_Model extends Model {
     public function findAllSupervisor(){
         return $this->db->select("select * from supervisor");
     }
+    
+    public function findSupervisorById($supervisorId){
+        return $this->db->select("select * from supervisor where supervisor_id = '".$supervisorId."'");
+    }
 }
 

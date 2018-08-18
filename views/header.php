@@ -87,13 +87,38 @@ and open the template in the editor.
         }
 
         function passAssessmentId(id) {
-            document.getElementById("idA").value = id;
-        }
-        function passAssessmentIdS(id) {
             document.getElementById("idAS").value = id;
         }
+        function passAssessmentIdS(id) {
+            document.getElementById("idA").value = id;
+        }
+      function passAssessmentScheduleId(id,assessmentScheduleId) {
+          
+            document.getElementById("idAS").value = id;
+            document.getElementById("scheduleId").value = assessmentScheduleId;
+        } 
+        function deleteAssessmentSchedule(){
+           var id = document.getElementById("idAS").value;
+           if(id != null){
+               jQuery.ajax({
+                   url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/deleteAssessmentSchedule',
+                   type: "POST",
+                   data: {id:id},
+                   success: function (rest){
+                      if(rest == 'OK')
+                          alert("Successully delete Schedule");
+                      else
+                          alert("Deletion of Assessment Schedule is failed, please try again");
+                }
+               });
+           }
+       }
+        
+        function passId(id){
+           document.getElementById("idAS").value = id;    
+       }
         function deleteAssessment() {
-            var id = document.getElementById('idA').value;
+            var id = document.getElementById('idAS').value;
             jQuery.ajax({
                 url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/delete',
                 type: "POST",
@@ -188,10 +213,12 @@ and open the template in the editor.
             });
         }
         function saveAssessmentSchedule() {
-            schedule = [];
-            schedule[0] = document.getElementById("idAS").value;
+            schedule = [];      
+            schedule[0] = document.getElementById("idA").value;
 
-            scedule[2] = document.getElementById("assessmentTime").value;
+            alert(document.getElementById("assessmentDate").value);
+            schedule[1] = document.getElementById("assessmentDate").value;
+            schedule[2] = document.getElementById("assessmentTime").value;
             jQuery.ajax({
                 url: '<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/persistSchedule',
                 data: {schedule: schedule},
@@ -264,10 +291,47 @@ and open the template in the editor.
         function selectSupervisor(assessmentScheduleId) {
 
         }
-        function closeAssessmentSession(id) {
-            alert(id);
+        
+     function deleteAssessorFromSchedule(){ 
+        var assessorId = document.getElementById("idAS").value;
+        var scheduleAssmtId = document.getElementById("scheduleId").value;
+        assessorSchedule = [];
+        assessorSchedule[0] = assessorId;
+        assessorSchedule[1] = scheduleAssmtId;
+        if(assessorId != null && scheduleAssmtId != null){
+            jQuery.ajax({
+                url : '<?php  $_SERVER['DOCUMENT_ROOT']?>/snnprcoc/assessment/deleteAssessorAssignedForAssessment',
+                data : {assessor : assessorSchedule},
+                type: "POST",
+               success: function (data) {
+                        if (data == 'OK') {
+                            alert('Successfully  delete assessor!!');                        
+                        }
+                        else
+                            alert("Operation failed. Please try again");
+                    },
+                    error: function () {
+                    }
+            });
         }
-
+       }
+    
+        function closeAssessmentSession() {
+            //alert(document.getElementById("idAS").value);
+            var id = document.getElementById("idAS").value;
+            jQuery.ajax({
+                   url : '<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/closeAssessment',
+                   data : {assessmentId: id},
+                   type: "POST",
+                   success: function(data){
+                      if (data == 'OK') {
+                            alert('successfully close assessment session');                           
+                        }     
+                  },
+                  error: function(){
+                  }
+            });
+        }
     </script>
     <body>
         <div class="wrapper has-footer">
@@ -570,7 +634,7 @@ and open the template in the editor.
                             <div class="sub-menu collapse secondary" id="submenuEleven">
                                 <ul>
                                     <li><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/supervisor/supervisorRegistration">Supervisor Registration</a></li>
-                                    <li><a href="#">Manage Supervisor</a></li>
+                                    <li><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/supervisor/supervisorList">Manage Supervisor</a></li>
                                     <li><a href="#">Supervisor Activities</a></li>                           
                                 </ul>
                             </div>

@@ -76,7 +76,7 @@
                                             <?php } ?>
                                             <td>
                                               <?php if(($assessment['assessment_state'] == 'READY') && $assessment['schedule_status'] == 'NO') {?>  
-                                                <a href="#" data-toggle="modal" data-target="#myAssessmentSchesuleEdit" data-toggle="tooltip" title="Add Assessment Schedule" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
+                                                <a href="#" data-toggle="modal" data-target="#myAssessmentSchesuleAdd" data-toggle="tooltip" title="Add Assessment Schedule" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
                                                    onclick='passAssessmentIdS(<?php echo $assessment["assessmet_id"]; ?>);'><i class="fa fa-plus"></i></a>
                                               <?php } ?>
                                                 <?php if(($assessment['assessment_state'] == 'READY') && ($assessment['schedule_status'] == 'YES')){ ?>
@@ -159,7 +159,7 @@
                         </div>
 
                         <!-- Assessment schedule momodal -->
-                         <div class="modal modal-success fade" id="myAssessmentSchesuleEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                         <div class="modal modal-success fade" id="myAssessmentSchesuleAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <form class="form-horizontal" action="" method="post">
@@ -169,15 +169,8 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Schedule date -->
-                                              
-<!--                                            <div class="form-group">
-					<label for="assessmentDate" class="col-sm-2 control-label">Assessment Date </label>
-					<div class="col-sm-10">
-                                            <input type="date" name="assessmentDate" class="form-control" id="assessmentDate" placeholder="2011-08-19">
-					  <span id="error_assessmentDate" class="text-danger"></span>
-                                        </div>
-				  </div>-->
-                                         <div class="form-group">
+                                       
+<!--                                         <div class="form-group">
 					<label for="assessmentDate" class="col-sm-2 control-label" data-sideBySide="1">Assessment Date </label>
 					<div class="col-sm-10 input-group date dateTime-picker">
                                             <input type="text" name="assessmentDate" class="form-control" id="assessmentDate">
@@ -186,14 +179,24 @@
                                             </span>
 					  <span id="error_assessmentDate" class="text-danger"></span>
                                         </div>
-				  </div>
-<!--                                        <div class="form-group">
-                                    
-                                        <label for="assessmentDate">Assessment Date * </label>
-                                     <input id="assessmentDate" name="assessmentDate" class="form-control" type="date" value="2011-08-19"
-                                                style="width: 200%">
-                                          <span id="error_assessmentDate" class="text-danger"></span>
-                                </div>-->
+				  </div>-->
+                                     <div class="form-group">
+                                    <label for="assessmentDate" class="col-sm-2 control-label" data-sideBySide="1">Assessment Date</label>
+                                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                        <input type="text" name="assessmentDate" id="assessmentDate" class="form-control" placeholder="Select Date">
+                                        <div class="input-group-addon">
+                                            <span class="sli-calendar"></span>
+                                        </div>
+                                        <span id="error_assessmentDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="assessmentTime" class="col-sm-2 control-label" data-sideBySide="1">Assessment Time</label>  
+                                  <div class="input-group bootstrap-timepicker timepicker">
+                                      <input type="text" class="form-control time-picker" name="assessmentTime" id="assessmentTime">
+                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    </div>
+                                </div>
                                     </div>
                                     <div class="col-sm-10">
                                         <input type="hidden" name="idA" class="form-control" id="idA">

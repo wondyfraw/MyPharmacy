@@ -40,8 +40,8 @@
                                                    if($this->assessmet[0]['assessment_state'] == 'READY'){?>
                                                 <a href="#" data-toggle="modal"  data-target="#myAssessmentSchesuleEdit" data-toggle="tooltip" title="Edit" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
                                                          onclick='passAssessmentSchedule(<?php echo json_encode($scedule); ?>);'><i class="fa fa-pencil"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="delete" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
-                                                         onclick='openT(<?php echo json_encode($scedule); ?>);'><i class="fa fa-trash"></i></a>
+                                               <a href="#" data-toggle="modal" data-target="#myAssessmentScheduleDeleteModal" data-toggle="tooltip" title="delete" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
+                                                   onclick='passId(<?php echo $scedule["assessment_schedule_id"]; ?>);'><i class="fa fa-trash"></i></a>
 
                                             </td>
                                             
@@ -50,8 +50,9 @@
                                         <?php }} ?>
                                 </tbody>
                                 </table>
-                        
-                            <!-- Assessment schedule momodal -->
+                        <a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentList" data-toggle="tooltip" title="Back to assessment list" class="btn btn-primary btn-link active" role="button" aria-pressed="true">Back To Assessment</a>
+                          
+                        <!-- Assessment schedule momodal -->
                          <div class="modal modal-success fade" id="myAssessmentSchesuleEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
@@ -110,6 +111,31 @@
                                 </div>
                               </div>
                         </div>
+                        
+                              <!--  Assessment deletion modales  -->
+                        <div class="modal fade" id="myAssessmentScheduleDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <form class="form-horizontal" action="" method="post">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this Assessment Schedule?
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="hidden" name="idAS" class="form-control" id="idAS">
+                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" onclick="deleteAssessmentSchedule()">Yes</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                              
                     </div>
 
                 </div>

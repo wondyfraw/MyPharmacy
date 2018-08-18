@@ -29,7 +29,7 @@ class Assessor extends Controller {
 
     function persistAssessor() {
         if (isset($_POST['submit'])) {
-            $target_dir = "public/docs/";
+            $target_dir = "public/assessor/docs/";
             $target_file = $_FILES["imageUpload"]["name"];
             $imageExtension = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -126,7 +126,7 @@ class Assessor extends Controller {
      */
     function updateAssessor($assessorId = null, $imageName = null) {
         if ($assessorId != null) {
-            $target_dir = "public/docs/";
+            $target_dir = "public/docs/assessor/";
 
             //$image = chunk_split(base64_encode(file_get_contents($_FILES['imageUpload']['tmp_name'])));
             //$image = addslashes(file_get_contents($_FILES['imageUpload']["tmp_name"]));

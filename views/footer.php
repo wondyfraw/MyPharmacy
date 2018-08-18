@@ -187,6 +187,7 @@
         //document.getElementsByTagName('body')[0].appendChild(iDiv);
         //$('#assessor_status').html("Success");
     }
+    
     //alert(myParam);
 //        $(document).ready(function() {
 // $('#assessmentDate').datepicker('setStartDate', new Date());

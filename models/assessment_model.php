@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 
+//$result = $this->db->select('SELECT role FROM user WHERE id = :id', array(':id' => $id));
 class Assessment_Model extends Model{
 
     function __construct() {
@@ -61,6 +62,48 @@ class Assessment_Model extends Model{
         }
     }
     
+    public function deleteAssessorFromSchedule($assessorId=null, $scheuleId =null) {
+        if($assessorId != null && $scheuleId != null){
+            return $this->db->delete('assessor_assessment_schedule', "assessment_schedule_id = '".$scheuleId."' and assessor_id = '".$assessorId."'");
+        }
+        
+    }
+    /**
+     * 
+     * @param type $assessmentId
+     */
+    public function deleteAssessmentScheduleByAssessmentId($assessmentId){
+        $result = $this->db->select("select * from assessment_schedule where assessmentId = '".$assessmentId."'");
+        
+        //delete assessor_assessment_schelue
+        if(count($result) > 0){
+          $assessorSchedule = $this-> findAssessorAssignedToScheduleByScheduleId($result[0]['assessment_schedule_id']); 
+          $supervisorSchedule = $this->findSupervisorAssignedToScheduleByScheduleId($result[0]['assessment_schedule_id']);
+          if(count($assessorSchedule) > 0)
+              $assessor = $this->db->delete('assessor_assessment_schedule' , "assessment_schedule_id = '".$assessorSchedule[0]['assessment_schedule_id']."'");
+        
+          if(count($supervisorSchedule) >0)
+               $this->db->delete('supervisor_assessment_schedule' , "assessment_schedule_id = '".$supervisorSchedule[0]['assessment_schedule_id']."'");
+        
+           return $this->db->delete('assessment_schedule' ,"assessment_schedule_id = '".$result[0]['assessment_schedule_id']."'");
+        }
+    }
+    public function deleteAssessmentScheduleByScheduleId($scheduleId) {
+        $result = $this->db->select("select * from assessment_schedule where assessment_schedule_id = '".$scheduleId."'");
+        
+        //delete assessor_assessment_schelue
+        if(count($result) > 0){
+          $assessorSchedule = $this-> findAssessorAssignedToScheduleByScheduleId($scheduleId); 
+          $supervisorSchedule = $this->findSupervisorAssignedToScheduleByScheduleId($scheduleId);
+          if(count($assessorSchedule) > 0)
+              $assessor = $this->db->delete('assessor_assessment_schedule' , "assessment_schedule_id = '".$assessorSchedule[0]['assessment_schedule_id']."'");
+        
+          if(count($supervisorSchedule) >0)
+               $this->db->delete('supervisor_assessment_schedule' , "assessment_schedule_id = '".$supervisorSchedule[0]['assessment_schedule_id']."'");
+        
+           return $this->db->delete('assessment_schedule' ,"assessment_schedule_id = '".$scheduleId."'");
+        } 
+    }        
     function updateAssessment($data){
      $dataUpdate = array(
             'occupationId'                   => $data['occupationId'],
@@ -75,8 +118,8 @@ class Assessment_Model extends Model{
          $this->db->update('assessmet' , $dataUpdate , "`assessmet_id` = {$data['assessmentId']}");
     }
     //first delete data from child table
-    function deleteFromCandidateAssessment($id){
-        $result = $this->db->select("select * from candidate_assessment where assessmentId = '".$id."'");
+    function deleteFromCandidateAssessment($assessmentId){
+        $result = $this->db->select("select * from candidate_assessment where assessmentId = '".$assessmentId."'");
         if(count($result)>0){
             return $this->db->delete('candidate_assessment',"assessmentId = '".$id."'");
         }
@@ -89,6 +132,12 @@ class Assessment_Model extends Model{
                      'assessment_time' => $data['assessmentTime']
         ));
         return $lastId;
+    }
+    
+    public function closeAssessment($assessmentId) {
+        $data = array('assessment_state' => 'CLOSED',
+                      '	closing_date' => date('Y-m-d H:i:s'));
+        $this->db->update('assessmet' , $data, "`assessmet_id` = {$assessmentId}");
     }
     
     function updateScheduleStatus($assessmentId){
@@ -127,11 +176,11 @@ class Assessment_Model extends Model{
     }
     
     function findAssessorByOccupationName($occupation){
-        return $this->db->select("select * from assessor,assessor_assessment_schedule where assessor.occupation = '".$occupation."' and assessor.assessor_id <> assessor_assessment_schedule.assessor_id ");
+        return $this->db->select("select * from assessor where assessor.occupation = '".$occupation."' and assessor.assessor_id  NOT IN(select assessor_id from  assessor_assessment_schedule)");
     }
     
     function findAllSupervisor(){
-        return $this->db->select("select * from supervisor,supervisor_assessment_schedule where supervisor_assessment_schedule.supervisor_id <>supervisor.supervisor_id ");
+        return $this->db->select("select * from supervisor where supervisor.supervisor_id NOT IN(select supervisor_id from supervisor_assessment_schedule)");
     }
             
     function persistAssessor($data){
@@ -148,6 +197,17 @@ class Assessment_Model extends Model{
                        'assessment_schedule_id'  => $data['scheduleId']
         ));
         return $lastId; 
+    }
+    
+    function findAssessorAssignedToScheduleByScheduleId($scheuleId = null){
+       if($scheuleId != null) 
+           return $this->db->select("select * from assessor_assessment_schedule where assessment_schedule_id = '".$scheuleId."'"); 
+    }
+   
+    public function findSupervisorAssignedToScheduleByScheduleId($scheduleId = null) {
+        if($scheduleId != null){
+            return $this->db->select("select * from supervisor_assessment_schedule where assessment_schedule_id = '".$scheduleId."'");
+        }
     }
 }
 

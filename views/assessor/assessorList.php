@@ -54,52 +54,28 @@
                                 </tbody>
                                 </table>
                         
-                            <!-- Assessment schedule momodal -->
-                         <div class="modal modal-success fade" id="myAssessmentSchesuleEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog modal-lg" role="document">
+                          <!--  Assessor deletion modales  -->
+                        <div class="modal fade" id="myAssessmentDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
                                 <div class="modal-content">
                                     <form class="form-horizontal" action="" method="post">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Assessment Schedule Date</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
                                     </div>
                                     <div class="modal-body">
-                                        
-                                     <div class="form-group">
-                                    <label for="assessmentDate" class="col-sm-2 control-label" data-sideBySide="1">Assessment Date</label>
-                                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                                        <input type="text" name="assessmentDate" id="assessmentDate" class="form-control" placeholder="Select Date">
-                                        <div class="input-group-addon">
-                                            <span class="sli-calendar"></span>
-                                        </div>
-                                        <span id="error_assessmentDate" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="assessmentTime" class="col-sm-2 control-label" data-sideBySide="1">Assessment Time</label>  
-                                  <div class="input-group bootstrap-timepicker timepicker">
-                                      <input type="text" class="form-control time-picker" name="assessmentTime" id="assessmentTime">
-                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                    </div>
-                                </div>
-<!--                                       <div class="form-group">
-                                            <label for="assessmentTime" class="col-sm-2">Assessment Time *</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" value="2012-05-15 21:05" id="datetimepicker">
-                                                <span id="error_assessmentTime" class="text-danger"></span>
-                                            </div>
-                                        </div>-->
+                                        Are you sure you want to delete Assessor?
                                     </div>
                                     <div class="col-sm-10">
                                         <input type="hidden" name="idAS" class="form-control" id="idAS">
-                                    </div>     
+                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" onclick="updateAssessmentSchedule()">Save</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" onclick="deleteAssessment()">Yes</button>
                                     </div>
                                     </form>
                                 </div>
-                              </div>
+                            </div>
                         </div>
                     </div>
 

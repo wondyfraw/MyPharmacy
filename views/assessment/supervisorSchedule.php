@@ -73,9 +73,7 @@
                                             <td><?php echo $supervisor['phone_number']; ?></td>
                                             <td><?php echo $supervisor['email']; ?></td>                                                                                         
                                             <td><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentScheduleDetails?id=<?php echo $scedule['assessment_schedule_id']; ?>&idA=<?php echo $scedule['assessmentId']; ?>" data-toggle="tooltip" title="view" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true"><i class="fa fa-search"></i></a>
-                                               
-                                                <a href="#" data-toggle="modal"  data-target="#myAssessmentSchesuleEdit" data-toggle="tooltip" title="Edit" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
-                                                         onclick='passAssessmentSchedule(<?php echo json_encode($scedule); ?>);'><i class="fa fa-pencil"></i></a>
+                                                                                             
                                                 <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="delete" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
                                                          onclick='openT(<?php echo json_encode($scedule); ?>);'><i class="fa fa-trash"></i></a>
 

@@ -72,11 +72,9 @@
                                             <td><?php echo $assessor['phone_number']; ?></td>
                                             <td><?php echo $assessor['email']; ?></td>                                                                                         
                                             <td><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentScheduleDetails?id=<?php echo $scedule['assessment_schedule_id']; ?>&idA=<?php echo $scedule['assessmentId']; ?>" data-toggle="tooltip" title="view" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true"><i class="fa fa-search"></i></a>
-                                               
-                                                <a href="#" data-toggle="modal"  data-target="#myAssessmentSchesuleEdit" data-toggle="tooltip" title="Edit" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
-                                                         onclick='passAssessmentSchedule(<?php echo json_encode($scedule); ?>);'><i class="fa fa-pencil"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="delete" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
-                                                         onclick='openT(<?php echo json_encode($scedule); ?>);'><i class="fa fa-trash"></i></a>
+                                                                                           
+                                                <a href="#" data-toggle="modal" data-target="#myAssessmentDeleteModal" data-toggle="tooltip" title="delete" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
+                                                   onclick='passAssessmentScheduleId(<?php echo $assessor['assessor_id']; ?>,<?php echo $assessor['assessment_schedule_id']; ?>);'><i class="fa fa-trash"></i></a>
 
                                            </td>                                                                                           
                                         </tr> 
@@ -101,6 +99,33 @@
                                      <i class="sli-plus" style="margin-right: 10px;"></i>Add Assessor</button>
 <!--                        <a class="btn btn-primary" href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/snnprcoc/assessment/assessmentList" role="button" style="margin-left: 3px;width: 200px;padding: 10px;margin-top:30px">Back to Home page</a>-->
                                 </form>
+                                
+                                <!--  Assessment deletion modales  -->
+                        <div class="modal fade" id="myAssessmentDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <form class="form-horizontal" action="" method="post">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete Assessor?
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input type="hidden" name="idAS" class="form-control" id="idAS">
+                                     </div>
+                                        <div class="col-sm-10">
+                                            <input type="hidden" name="scheduleId" id="scheduleId" class="form-control">
+                                        </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" onclick="deleteAssessorFromSchedule()">Yes</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                             </div>
                         </div>
                     </div>

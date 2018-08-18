@@ -131,6 +131,9 @@ class Assessment extends Controller {
             $id = filter_input(INPUT_POST, 'id');
             $cand_ass = $this->model->deleteFromCandidateAssessment($id);
             
+            //delete schedule
+            $schedule = $this->model->deleteAssessmentScheduleByAssessmentId($id);
+            
             //delete assessment 
             $ass = $this->model->delete($id);
             if(is_numeric($ass))
@@ -140,6 +143,16 @@ class Assessment extends Controller {
         }
     }
     
+    function deleteAssessmentSchedule() {
+        if(isset($_POST['id'])){
+            $id = filter_input(INPUT_POST, 'id');
+            $schedule = $this->model->deleteAssessmentScheduleByScheduleId($id);
+            if(is_numeric($schedule))
+                echo 'OK';
+            else
+                echo 'NO';
+        }
+    }
     function persistSchedule(){
         if(isset($_POST['schedule'][0]) && isset($_POST['schedule'][1])){
             $data = array('assessmetDate' => $_POST['schedule'][1],
@@ -190,12 +203,16 @@ class Assessment extends Controller {
             //id = assessmentSchedule id
             //idA = assessment Id
             //$assessment = $this->model->findAssessmentById($_GET['idA']);
-            $assessment = $this->assessmentWithOccupation($_GET['idA']);
-            $assessmentSchedule = $this->model->findAssessmentScheduleByScheduleId($_GET['id']);
-            $totalCandidate = $this->totalNumberOfCandidatesWithAssessmentId($_GET['idA']);
+            $scheduleId = $_GET['id'];
+            $assessmentId = $_GET['idA'];
+            $assessment = $this->assessmentWithOccupation($scheduleId);
+            $assessmentSchedule = $this->model->findAssessmentScheduleByScheduleId($assessmentId);
+            $totalCandidate = $this->totalNumberOfCandidatesWithAssessmentId($scheduleId);
             $assessorWithOccupation = $this->model->findAssessorByOccupationName($assessment[0]['occupationName']);
-            $assessor = $this->model->assessorAssignForAssessment($_GET['id']);
-            $supervisor = $this->model->supervisorAssignForAssessment($_GET['id']);
+            $assessor = $this->model->assessorAssignForAssessment($assessmentId);
+            $supervisor = $this->model->supervisorAssignForAssessment($assessmentId);
+            //echo '<pre>';
+            //print_r($assessorWithOccupation);die();
             $this->view->assessments = $assessment;
             $this->view->totalCandidates = $totalCandidate;
             $this->view->schedules = $assessmentSchedule;
@@ -208,6 +225,23 @@ class Assessment extends Controller {
        }
     }
     
+    public function deleteAssessorAssignedForAssessment() {
+        if(isset($_POST['assessor'][0]) && isset($_POST['assessor'][1])){
+            $result = $this->model->deleteAssessorFromSchedule($_POST['assessor'][0] , $_POST['assessor'][1]);
+            
+            if (is_numeric($result) && $result != 0)
+                echo 'OK';
+            else {
+                echo 'NO';    
+            }
+        }
+    }
+    function closeAssessment(){
+        if(isset($_POST['assessmentId'])){
+            $this->model->closeAssessment($_POST['assessmentId']);          
+            echo 'OK';
+        }
+    }
     function selectAssessor(){
       if(isset($_POST['assessor'][0]) && isset($_POST['assessor'][1])){
           $data = array('assessorId' => $_POST['assessor'][0],
