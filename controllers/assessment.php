@@ -255,6 +255,10 @@ class Assessment extends Controller {
                         
               ); 
               $lastId =  $this->model->persitResult($data);
+              if(is_numeric($lastId))
+                  echo 'OK';
+              else
+                  echo 'NO';
             }
     }
     
