@@ -37,6 +37,7 @@ class Candidates_Model extends Model {
                     'assessmentId' => $data['assessmentId'],
                     'assessment_type' => $data['assessment_type'],
                     'payment_status' => $data['payment_status'],
+                    'result_status'  => $data['result_status'],
                     'registration_date'  => $data['registration_date']
                      ));
         return $lastId;

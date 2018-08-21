@@ -205,11 +205,11 @@ class Assessment extends Controller {
             //$assessment = $this->model->findAssessmentById($_GET['idA']);
             $scheduleId = $_GET['id'];
             $assessmentId = $_GET['idA'];
-            $assessment = $this->assessmentWithOccupation($scheduleId);
-            $assessmentSchedule = $this->model->findAssessmentScheduleByScheduleId($assessmentId);
+            $assessment = $this->assessmentWithOccupation($assessmentId);
+            $assessmentSchedule = $this->model->findAssessmentScheduleByScheduleId($scheduleId);
             $totalCandidate = $this->totalNumberOfCandidatesWithAssessmentId($scheduleId);
             $assessorWithOccupation = $this->model->findAssessorByOccupationName($assessment[0]['occupationName']);
-            $assessor = $this->model->assessorAssignForAssessment($assessmentId);
+            $assessor = $this->model->assessorAssignForAssessment($scheduleId);
             $supervisor = $this->model->supervisorAssignForAssessment($assessmentId);
             //echo '<pre>';
             //print_r($assessorWithOccupation);die();
@@ -223,6 +223,39 @@ class Assessment extends Controller {
             $this->view->allSupervisor = $this->model->findAllSupervisor();
             $this->view->render1('assessment/assessmentScheduleDetails' , 'header' , 'footer');
        }
+    }
+    
+    //list of candidates registered for this occupation and thier result, if they take exam
+    public function candidateResult() {
+        if(isset($_GET['idSch']) && isset($_GET['idA'])){
+        $candidates = $this->model->fidCandidatesRegisteredForeachOccupation($_GET['idSch'],$_GET['idA']);
+       
+        $assessmentSchedule = $this->model->findAssessmentScheduleByScheduleId($_GET['idSch']);
+        $assessment = $this->assessmentWithOccupation($_GET['idA']);
+        $assessor = $this->model->assessorAssignForAssessment($_GET['idSch']);
+        $candidates = $this->model->fidCandidatesRegisteredForeachOccupation($_GET['idSch'],$_GET['idA']);
+        $this->view->assessments = $assessment;
+        $this->view->schedules = $assessmentSchedule;
+        $this->view->assessors = $assessor;
+        $this->view->cadidates = $candidates;
+        $this->view->render1('assessment/candidateResult' , 'header' , 'footer');
+        }
+    }
+    
+    public function persistResult() {
+        if(isset($_POST['results'][0]) && isset($_POST['results'][1]) && 
+                isset($_POST['reslts'][2]) && isset($_POST['results'][3]))
+            {
+              $data = array('assessorId' => $_POST['results'][0],
+                            'scheduleAssmtId' => $_POST['results'][1],
+                            'candidateId'     => $_POST['results'][2],
+                            'result'          => $_POST['results'][3],
+                            'regDate'         => date('Y-m-d H:i:s'),
+                            'modDate'         => ""
+                        
+              ); 
+              $lastId =  $this->model->persitResult($data);
+            }
     }
     
     public function deleteAssessorAssignedForAssessment() {
@@ -274,9 +307,11 @@ class Assessment extends Controller {
         $tempResult = array();
             $this->view->id = $id;
             $result = $this->model->findAssessmentById($id);
-            $occupation = $this->model->findOccupationById($result[0]['occupationId']);
-            $tempResult[0] = $result[0];
-            $tempResult[0]['occupationName'] = $occupation[0]['occupation_name'];
+            if(count($result) >0){
+                $occupation = $this->model->findOccupationById($result[0]['occupationId']);
+                $tempResult[0] = $result[0];
+                $tempResult[0]['occupationName'] = $occupation[0]['occupation_name'];
+            }
             return $tempResult;
     }
     

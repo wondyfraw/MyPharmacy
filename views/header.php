@@ -97,6 +97,11 @@ and open the template in the editor.
             document.getElementById("idAS").value = id;
             document.getElementById("scheduleId").value = assessmentScheduleId;
         } 
+      function passCanndidateAssessmentScheduleId(assessorId,scheduleId,candidateId){
+         document.getElementById("idAS").value = assessorId;
+         document.getElementById("scheduleId").value = scheduleId;   
+         document.getElementById("candidateId").value =candidateId;  
+    }
         function deleteAssessmentSchedule(){
            var id = document.getElementById("idAS").value;
            if(id != null){
@@ -315,6 +320,33 @@ and open the template in the editor.
             });
         }
        }
+       function saveResult(){
+           var assessorId = document.getElementById("idAS").value;
+           var scheduleAssmtId = document.getElementById("scheduleId").value;
+           var candidateId = document.getElementById("candidateId").value;
+           var result = document.getElementById("assessmentResult").value;
+           
+           var results = [];
+           results[0] = assessorId;
+           results[1] = scheduleAssmtId;
+           results[2] = candidateId;
+           results[3] = result;
+           jQuery.ajax({
+                url : '<?php  $_SERVER['DOCUMENT_ROOT']?>/snnprcoc/assessment/persistResult',
+                data : {results : results},
+                type: "POST",
+               success: function (data) {
+                        if (data == 'OK') {
+                            alert('Successfully  delete assessor!!');                        
+                        }
+                        else
+                            alert("Operation failed. Please try again");
+                    },
+                    error: function () {
+                    }
+           });
+           alert(assessorId + " " + scheduleAssmtId + " " + result);
+      }
     
         function closeAssessmentSession() {
             //alert(document.getElementById("idAS").value);

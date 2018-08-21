@@ -93,7 +93,7 @@
 				  <div class="form-group">
 					<label for="sector" class="col-sm-2 control-label">Sector</label>
 					<div class="col-sm-10">
-					  <input type="text" name="sector" class="form-control" id="sector" placeholder="Sector">
+                                            <input type="text" name="sector" class="form-control" id="sector" placeholder="Sector">
 					</div>
 				  </div>
                               <div class="form-group">

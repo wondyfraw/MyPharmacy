@@ -89,6 +89,7 @@ class Candidates extends Controller {
                                  'assessmentId'  => filter_input(INPUT_POST, 'id'),
                                  'assessment_type'  =>$assessmentType,
                                  'payment_status'   => "Not pay",
+                                 'result_status'    => "NO",
                                  'registration_date' => date('Y-m-d H:i:s'));
                              
                $lastInsertedId =  $this->model->persistCandidateAssessment($cad_ass);  

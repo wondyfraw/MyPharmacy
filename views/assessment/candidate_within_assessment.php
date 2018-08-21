@@ -66,12 +66,12 @@
                                             <td><?php echo $candidate['gender']; ?></td>
                                             <td><?php echo $candidate['address']; ?></td>
                                             <td><?php echo $candidate['phone_number']; ?></td>
-                                            <td><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentDetailes?id=<?php echo $candidate['candidate_id']; ?>" data-toggle="tooltip" title="view" class="btn btn-primary btn-link active" role="button" aria-pressed="true"><i class="fa fa-search"></i></a>
-                                              <a href="#" data-toggle="modal"  data-toggle="tooltip" title="Edit" class="btn btn-primary btn-link active" role="button" aria-pressed="true" 
+                                            <td><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentDetailes?id=<?php echo $candidate['candidate_id']; ?>" data-toggle="tooltip" title="view" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true"><i class="fa fa-search"></i></a>
+                                              <a href="#" data-toggle="modal"  data-toggle="tooltip" title="Edit" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
                                                          ><i class="fa fa-pencil"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="delete" class="btn btn-primary btn-link active" role="button" aria-pressed="true" 
+                                                <a href="#" data-toggle="modal" data-target="#ModalAdd" data-toggle="tooltip" title="delete" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
                                                          onclick='openT(<?php echo json_encode($occupation); ?>);'><i class="fa fa-trash"></i></a>
-                                                 <a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/candidates/index?id=<?php echo $candidate['candidate_id']; ?>"   data-toggle="tooltip" title="Add Candidate Result" class="btn btn-primary btn-link active" role="button" 
+                                                 <a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/candidates/index?id=<?php echo $candidate['candidate_id']; ?>"   data-toggle="tooltip" title="Add Candidate Result" class="btn btn-primary btn-xs btn-link active" role="button" 
                                                     aria-pressed="true"><i class="fa fa-plus"></i></a>
                                             </td>
                                         </tr> 

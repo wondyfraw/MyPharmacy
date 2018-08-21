@@ -71,7 +71,7 @@
                                             <td><?php echo $assessor['accreditation_date']; ?></td>
                                             <td><?php echo $assessor['phone_number']; ?></td>
                                             <td><?php echo $assessor['email']; ?></td>                                                                                         
-                                            <td><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/assessmentScheduleDetails?id=<?php echo $scedule['assessment_schedule_id']; ?>&idA=<?php echo $scedule['assessmentId']; ?>" data-toggle="tooltip" title="view" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true"><i class="fa fa-search"></i></a>
+                                            <td><a href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/snnprcoc/assessment/candidateResult?idSch=<?php echo $assessor['assessment_schedule_id']; ?>&idA=<?php echo $assessor['assessmentId']; ?>&occ=<?php echo $this->assessments[0]['occupationName']; ?>" data-toggle="tooltip" title="view" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true"><i class="fa fa-search"></i></a>
                                                                                            
                                                 <a href="#" data-toggle="modal" data-target="#myAssessmentDeleteModal" data-toggle="tooltip" title="delete" class="btn btn-primary btn-xs btn-link active" role="button" aria-pressed="true" 
                                                    onclick='passAssessmentScheduleId(<?php echo $assessor['assessor_id']; ?>,<?php echo $assessor['assessment_schedule_id']; ?>);'><i class="fa fa-trash"></i></a>

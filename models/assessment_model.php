@@ -167,6 +167,15 @@ class Assessment_Model extends Model{
                                                assessor_assessment_schedule.assessment_schedule_id = '".$scheduleId."'");
     }
     
+    public function fidCandidatesRegisteredForeachOccupation($scheduleId=null , $assessmentId = null) {
+        if($scheduleId != null && $assessmentId != null){
+            return $this->db->select("select * from candidate,candidate_assessment where candidate_id IN(
+                                                                              select candidate_assessment.candidateId from candidate_assessment ,assessment_schedule,assessmet 
+                                                                              where candidate_assessment.assessmentId = assessmet.assessmet_id and assessmet.assessmet_id = assessment_schedule.assessmentId and 
+                                                                              assessmet.assessmet_id = '".$assessmentId."' and assessment_schedule.assessment_schedule_id = '".$assessmentId."')");
+        }
+    }
+    
     //find supervisor assign for each schedule
     function supervisorAssignForAssessment($scheduleId){
         return $this->db->select("select * from supervisor ,supervisor_assessment_schedule,assessment_schedule  
@@ -199,6 +208,16 @@ class Assessment_Model extends Model{
         return $lastId; 
     }
     
+    public function persitResult($data) {
+        $lastId = $this->db->insert('assessment_result' , array(
+                            'candidateId' => $data['candidateId'],
+                            'assessment_scheduleId' => $data['scheduleAssmtId'],
+                            'assessorId'            => $data['assessorId'],
+                            'result'                => $data['result'],
+                            'registration_date'     => $data['regDate'],
+                            'modified_date'         => $data['modDate']
+        ));
+    }
     function findAssessorAssignedToScheduleByScheduleId($scheuleId = null){
        if($scheuleId != null) 
            return $this->db->select("select * from assessor_assessment_schedule where assessment_schedule_id = '".$scheuleId."'"); 
