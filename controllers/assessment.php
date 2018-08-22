@@ -4,9 +4,15 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ * 
+ * 
  */
 
-class Assessment extends Controller {
+/**
+ * @copyright (c) 2018, Wondyfraw Hailu Ayele
+ */
+
+class Assessment extends Controller{
 
     public $assessmentId = 0;
 
@@ -28,7 +34,11 @@ class Assessment extends Controller {
         $this->view->occupations = $this->model->findAllOccupation();
         $this->view->render1('assessment/assessmentRegistration', 'header', 'footer');
     }
-    
+    /**
+     * edit assessment by thier assessment Id
+     * find assessment by there Id and if exist pass the value to edite page 
+     *  
+     */
     function editAssessment(){
         if (isset($_GET['assessmentId'])){
           $occupationInAssessment = array();  
@@ -50,19 +60,22 @@ class Assessment extends Controller {
         
     }
 
+    /**
+     * save assessment to the database 
+     */
     function persistAssessment() {
         if (isset($_POST['submit'])) {        
-            $data = array('occupationId' => filter_input(INPUT_POST, 'occupation'),
-                'assessmentPurpose' => filter_input(INPUT_POST, 'assessmentPurpose'),
-                'candidateCatagory' => filter_input(INPUT_POST, 'candidateCatagory'),
-                'level' => filter_input(INPUT_POST, 'level'),
-                'education' => filter_input(INPUT_POST, 'education'),
-                'typeOfEmp' => filter_input(INPUT_POST, 'typeOfEmp'),
-                'typeOfOwnership' => filter_input(INPUT_POST, 'typeOfOwnership'),
-                'assessmentState' => 'READY',
-                'regDate' => date('Y-m-d H:i:s'),
-                'closingDate' => '',
-                'modDate' => '');
+            $data = array('occupationId'  => filter_input(INPUT_POST, 'occupation'),
+                'assessmentPurpose'       => filter_input(INPUT_POST, 'assessmentPurpose'),
+                'candidateCatagory'       => filter_input(INPUT_POST, 'candidateCatagory'),
+                'level'                   => filter_input(INPUT_POST, 'level'),
+                'education'               => filter_input(INPUT_POST, 'education'),
+                'typeOfEmp'               => filter_input(INPUT_POST, 'typeOfEmp'),
+                'typeOfOwnership'         => filter_input(INPUT_POST, 'typeOfOwnership'),
+                'assessmentState'         => 'READY',
+                'regDate'                 => date('Y-m-d H:i:s'),
+                'closingDate'             => '',
+                'modDate'                 => '');
 
             $lasId = $this->model->persistAssessment($data);
             if (is_numeric($lasId)) {
@@ -71,17 +84,23 @@ class Assessment extends Controller {
         }
     }
     
+    /**
+     * 
+     * @param type $assId
+     * update assessment table
+     * perform this operation only when $assId is not null
+     */
     function update($assId = null){
         if($assId != null){
           $data = array('occupationId' => filter_input(INPUT_POST, 'occupation'),
-                'assessmentPurpose' => filter_input(INPUT_POST, 'assessmentPurpose'),
-                'candidateCatagory' => filter_input(INPUT_POST, 'candidateCatagory'),
-                'level' => filter_input(INPUT_POST, 'level'),
-                'education' => filter_input(INPUT_POST, 'education'),
-                'typeOfEmp' => filter_input(INPUT_POST, 'typeOfEmp'),
-                'typeOfOwnership' => filter_input(INPUT_POST, 'typeOfOwnership'),
-                'assessmentId' => $assId,
-                'modDate' => date('Y-m-d H:i:s'));
+                'assessmentPurpose'    => filter_input(INPUT_POST, 'assessmentPurpose'),
+                'candidateCatagory'    => filter_input(INPUT_POST, 'candidateCatagory'),
+                'level'                => filter_input(INPUT_POST, 'level'),
+                'education'            => filter_input(INPUT_POST, 'education'),
+                'typeOfEmp'            => filter_input(INPUT_POST, 'typeOfEmp'),
+                'typeOfOwnership'      => filter_input(INPUT_POST, 'typeOfOwnership'),
+                'assessmentId'         => $assId,
+                'modDate'              => date('Y-m-d H:i:s'));
             //echo '<pre>';
             //print_r($data);die();
             $this->model->updateAssessment($data);
@@ -93,7 +112,11 @@ class Assessment extends Controller {
     function success(){
         $this->view->render1('assessment/success');
     }
-
+    
+    /**
+     * read all assessments from the data base and
+     * pass to the view
+     */
     function assessmentList() {
         $result = $this->model->findAll();
         $cnt = 0;
@@ -107,6 +130,12 @@ class Assessment extends Controller {
         $this->view->render1('assessment/assessmentList', 'header', 'footer');
     }
 
+    /**
+     * find assessment by assessment Id
+     * find occupation by accupation id 
+     * then combine the two result 
+     * finally pass to the view assessment detail infontmation  
+     */
     function assessmentDetailes() {
         //$this->assessmentId
         if ($_GET['id']) {
@@ -143,6 +172,9 @@ class Assessment extends Controller {
         }
     }
     
+    /**
+     * 
+     */
     function deleteAssessmentSchedule() {
         if(isset($_POST['id'])){
             $id = filter_input(INPUT_POST, 'id');
@@ -155,8 +187,8 @@ class Assessment extends Controller {
     }
     function persistSchedule(){
         if(isset($_POST['schedule'][0]) && isset($_POST['schedule'][1])){
-            $data = array('assessmetDate' => $_POST['schedule'][1],
-                          'assessmentId'  => $_POST['schedule'][0],
+            $data = array('assessmetDate'  => $_POST['schedule'][1],
+                          'assessmentId'   => $_POST['schedule'][0],
                           'assessmentTime' => $_POST['schedule'][2]
             );
             $lastId = $this->model->persistSchedule($data);
@@ -273,12 +305,23 @@ class Assessment extends Controller {
             }
         }
     }
+    
+    /**
+     * 
+     */
     function closeAssessment(){
         if(isset($_POST['assessmentId'])){
             $this->model->closeAssessment($_POST['assessmentId']);          
             echo 'OK';
         }
     }
+    
+    /**
+     * Ajax call
+     * select assessor with assessor and schedule id
+     * @return type OK if the operation finished successfully 
+     * @return type NO if operation fail
+     */
     function selectAssessor(){
       if(isset($_POST['assessor'][0]) && isset($_POST['assessor'][1])){
           $data = array('assessorId' => $_POST['assessor'][0],
@@ -293,6 +336,11 @@ class Assessment extends Controller {
       }  
     }
     
+    /**
+     * ajax call 
+     * @return type OK if the operation finished successfully 
+     * @return type NO if operation fail
+     */
      function selectSupervisor(){
       if(isset($_POST['supervisor'][0]) && isset($_POST['supervisor'][1])){
           $data = array('supervisorId' => $_POST['supervisor'][0],
@@ -306,7 +354,12 @@ class Assessment extends Controller {
               echo 'NO';
       }  
     }
-            
+    
+    /**
+     * 
+     * @param type $id
+     * @return type array of result
+     */
     function assessmentWithOccupation($id){
         $tempResult = array();
             $this->view->id = $id;
@@ -319,6 +372,11 @@ class Assessment extends Controller {
             return $tempResult;
     }
     
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
     function totalNumberOfCandidatesWithAssessmentId($id){
         $totalCandidate = $this->model->findTotalCandidate($id);
 //        echo '<pre>'; print_r($totalCandidate);die();
