@@ -10,7 +10,7 @@ define('DB_NAME', 'fms');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
-// The sitewide hashkey, do not change this because its used for passwords!
+// The sitewide hashkey, do not change this because its used for password!
 // This is for other hash keys... Not sure yet
 define('HASH_GENERAL_KEY', 'MixitUp200');
 

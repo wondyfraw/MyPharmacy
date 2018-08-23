@@ -36,161 +36,177 @@
     <body>
         <div id="app">
             <div class="sidebar app-aside" id="sidebar">
-				<div class="sidebar-container perfect-scrollbar">
+                <div class="sidebar-container perfect-scrollbar">
+                    <nav>
+                        <!-- start: MAIN NAVIGATION MENU -->
+                        <div class="navbar-title">
+                            <span>Main Navigation</span>
+                        </div>
+                        <ul class="main-navigation-menu">
+                            <li>
+                                <a href="dashboard.php">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-home"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> Dashboard </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> Pharmacist </span><i class="icon-arrow"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                                <ul class="sub-menu">
+                                    <!--<li>
+                                            <a href="doctor-specilization.php">
+                                                    <span class="title"> Doctor Specialization </span>
+                                            </a>
+                                    </li>-->
+                                    <li>
+                                        <a href="add-doctor.php">
+                                            <span class="title"> Add Pharmacist</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="manage-farmacist.php">
+                                            <span class="title"> Manage Pharmacist </span>
+                                        </a>
+                                    </li>
 
-<nav>
-						
-						<!-- start: MAIN NAVIGATION MENU -->
-						<div class="navbar-title">
-							<span>Main Navigation</span>
-						</div>
-						<ul class="main-navigation-menu">
-							<li>
-								<a href="dashboard.php">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-home"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> Dashboard </span>
-										</div>
-									</div>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:void(0)">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-user"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> Pharmacist </span><i class="icon-arrow"></i>
-										</div>
-									</div>
-								</a>
-								<ul class="sub-menu">
-									<!--<li>
-										<a href="doctor-specilization.php">
-											<span class="title"> Doctor Specialization </span>
-										</a>
-									</li>-->
-									<li>
-										<a href="add-doctor.php">
-											<span class="title"> Add Pharmacist</span>
-										</a>
-									</li>
-									<li>
-										<a href="manage-farmacist.php">
-											<span class="title"> Manage Pharmacist </span>
-										</a>
-									</li>
-									
-								</ul>
-								</li>
+                                </ul>
+                            </li>
 
-				               <li>
-								<a href="javascript:void(0)">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-user"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> Drugs </span><i class="icon-arrow"></i>
-										</div>
-									</div>
-								</a>
-								<ul class="sub-menu">
-									
-									<li>
-										<a href="manage-drugs.php">
-											<span class="title"> Manage Drugs </span>
-										</a>
-									</li>
-									<li>
-									  <a href="add-drugs.php">
-									      <span class="title">Add Drugs </span></a>
-									</li>
-									
-								</ul>
-								</li>	
-								<li>
-								<a href="javascript:void(0)">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-user"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> Report </span><i class="icon-arrow"></i>
-										</div>
-									</div>
-								</a>
-								<ul class="sub-menu">
-									
-									<li>
-										<a href="manage-users.php">
-											<span class="title"> Daily Report </span>
-										</a>
-									</li>
-									<li>
-									  <a href="#">
-									      <span class="title">Weekly Report </span></a>
-									</li>
-									<li>
-									    <a href="#">
-										  <span class="title">Monthly Report</span>
-										</a>
-									</li>
-									
-								</ul>
-								</li>	
-                              <li>
-								<a href="appointment-history.php">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-file"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> Appointment History </span>
-										</div>
-									</div>
-								</a>
-							</li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> Drugs </span><i class="icon-arrow"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="manage-drugs.php">
+                                            <span class="title"> Manage Drugs </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="add-drugs.php">
+                                            <span class="title">Add Drugs </span></a>
+                                    </li>
 
-	<li>
-								<a href="doctor-logs.php">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-list"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> Doctor Session Logs </span>
-										</div>
-									</div>
-								</a>
-							</li>		
+                                </ul>
+                            </li>
+                            
+                             <li>
+                                <a href="javascript:void(0)">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> Sales </span><i class="icon-arrow"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="manage-drugs.php">
+                                            <span class="title"> Manage Sales </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="add-drugs.php">
+                                            <span class="title">Add Drugs </span></a>
+                                    </li>
 
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> Report </span><i class="icon-arrow"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                                <ul class="sub-menu">							
+                                    <li>
+                                        <a href="manage-users.php">
+                                            <span class="title"> Daily Report </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="title">Weekly Report </span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="title">Monthly Report</span>
+                                        </a>
+                                    </li>								
+                                </ul>
+                            </li>	
+                            <li>
+                                <a href="appointment-history.php">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-file"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> Appointment History </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="doctor-logs.php">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-list"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> Doctor Session Logs </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>		
 
+                            <li>
+                                <a href="user-logs.php">
+                                    <div class="item-content">
+                                        <div class="item-media">
+                                            <i class="ti-list"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <span class="title"> User Session Logs </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>										
+                        </ul>
+                        <!-- end: CORE FEATURES -->
 
-							<li>
-								<a href="user-logs.php">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-list"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> User Session Logs </span>
-										</div>
-									</div>
-								</a>
-							</li>						
-				
-
-						</ul>
-						<!-- end: CORE FEATURES -->
-						
-					</nav>
-					</div>
-			</div>
+                    </nav>
+                </div>
+            </div>
             <div class="app-content">
 
                 <?php error_reporting(0); ?>
@@ -224,8 +240,8 @@
                             <li class="dropdown current-user">
                                 <a href class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="assets/images/avatar-1.jpg" alt="<?php echo $_SESSION['admin_name'];
-                                        ?>"> <span class="username">
-                                         <i class="ti-angle-down"></i></i></span>
+                ?>"> <span class="username">
+                                        <i class="ti-angle-down"></i></i></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-dark">
                                     <li>
@@ -259,4 +275,4 @@
 
                     <!-- end: NAVBAR COLLAPSE -->
                 </header>
-               
+
